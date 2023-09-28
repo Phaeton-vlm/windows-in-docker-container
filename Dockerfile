@@ -20,10 +20,12 @@ RUN apt-get update -y && \
     apt-get clean
 
 RUN curl -O https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.deb && \
-    dpkg -i vagrant_2.2.19_x86_64.deb && \
-    vagrant plugin install vagrant-libvirt && \
-    vagrant box add --provider libvirt peru/windows-server-2022-standard-x64-eval && \
-    vagrant init peru/windows-server-2022-standard-x64-eval
+    dpkg -i vagrant_2.2.19_x86_64.deb
+    
+RUN vagrant plugin install vagrant-libvirt
+
+RUN vagrant box add --provider libvirt peru/windows-10-enterprise-x64-eval && \
+    vagrant init peru/windows-10-enterprise-x64-eval
 
 ENV PRIVILEGED=true
 ENV INTERACTIVE=true
